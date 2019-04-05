@@ -21,7 +21,7 @@ namespace Shop.UIClassic.Android
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);//.PM.Permission[]
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
         //public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
