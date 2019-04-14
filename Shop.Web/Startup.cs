@@ -34,6 +34,7 @@ namespace Shop.Web
 
 
             services.AddTransient<SeedDb>();
+            services.AddScoped<IRepository, Repository>();//inyecto la interface con su implementación
 
 
             services.Configure<CookiePolicyOptions>(options =>

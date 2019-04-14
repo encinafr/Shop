@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
-using Shop.Web.Data.Entities;
+﻿
 
 namespace Shop.Web.Data
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Entities;
     public interface IRepository
     {
         void AddProduct(Product product);
