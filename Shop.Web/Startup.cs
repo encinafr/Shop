@@ -1,21 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Shop.Web.Data;
-using Shop.Web.Data.Entities;
-
+﻿
 namespace Shop.Web
 {
+    using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Http;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Data;
+    using Data.Entities;
+    using Web.Helpers;
+
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -47,7 +44,9 @@ namespace Shop.Web
 
 
             services.AddTransient<SeedDb>();
-            services.AddScoped<IRepository, Repository>();//inyecto la interface con su implementación
+            services.AddScoped<IProductRepository, ProductRepository>();//inyecto la interface con su implementación
+            services.AddScoped<Data.ICountryRepository, CountryRepository>();
+            services.AddScoped<IUserHelper, UserHelper>();
 
 
             services.Configure<CookiePolicyOptions>(options =>

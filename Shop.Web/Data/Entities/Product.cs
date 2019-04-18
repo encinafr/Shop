@@ -7,7 +7,7 @@ namespace Shop.Web.Data.Entities
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-    public class Product
+    public class Product : ICountryRepository
     {
         public int Id { get; set; }
 
