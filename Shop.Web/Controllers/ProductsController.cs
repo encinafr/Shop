@@ -10,6 +10,7 @@ namespace Shop.Web.Controllers
     using Shop.Web.Models;
     using System;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     public class ProductsController : Controller
     {
@@ -27,7 +28,7 @@ namespace Shop.Web.Controllers
         // GET: Products
         public IActionResult Index()
         {
-            return View(this.productRepository.GetAll());
+            return View(this.productRepository.GetAll().OrderBy(p => p.Name));
         }
 
         // GET: Products/Details/5
@@ -64,16 +65,19 @@ namespace Shop.Web.Controllers
 
                 if (view.ImageFile != null && view.ImageFile.Length > 0)
                 {
+                    var guid = Guid.NewGuid().ToString();//Guidd es conjunto de caracteres que nunca se repiten
+                    var file = $"{guid}.jpg";
+
                     path = Path.Combine(Directory.GetCurrentDirectory(),
-                                        "wwwroot\\images\\Products", 
-                                         view.ImageFile.FileName);
+                                        "wwwroot\\images\\Products",
+                                         file);
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await view.ImageFile.CopyToAsync(stream);
                     }
 
-                    path = $"~/images/Products/{view.ImageFile.FileName}";//~ sirve para que tome la ruta relativa
+                    path = $"~/images/Products/{file}";//~ sirve para que tome la ruta relativa
                 }
 
                 var product = this.ToProduct(view, path);
@@ -152,16 +156,19 @@ namespace Shop.Web.Controllers
 
                     if (view.ImageFile != null && view.ImageFile.Length > 0)
                     {
+                        var guid = Guid.NewGuid().ToString();//Guidd es conjunto de caracteres que nunca se repiten
+                        var file = $"{guid}.jpg";
+
                         path = Path.Combine(Directory.GetCurrentDirectory(),
                                             "wwwroot\\images\\Products",
-                                             view.ImageFile.FileName);
+                                             file);
 
                         using (var stream = new FileStream(path, FileMode.Create))
                         {
                             await view.ImageFile.CopyToAsync(stream);
                         }
 
-                        path = $"~/images/Products/{view.ImageFile.FileName}";//~ sirve para que tome la ruta relativa
+                        path = $"~/images/Products/{file}";//~ sirve para que tome la ruta relativa
                     }
 
                     var product = this.ToProduct(view, path);
